@@ -21,7 +21,7 @@ namespace TaskAngular.Resource.api.Controllers
         [Route("")]
         public IActionResult GetAvailableBooks()
         {
-            return Ok(store.Books);
+            return Ok(store.Books.ToArray());
         }
     }
 }

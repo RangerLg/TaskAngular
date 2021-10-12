@@ -52,17 +52,16 @@ namespace TaskAngular.Auth.api.Controllers
 
         [Route("login")]
         [HttpPost]
-
-        public string Login([FromBody]Login request)
+        public IActionResult Login([FromBody]Login request)
         {
             var user = AuthenticateUser(request.Email, request.Password);
 
             if (user != null)
             {
                 var token = GenerateJWT(user);
-                return token;
+                return Ok(new {access_token= token });
             }
-            return "Error";
+            return Unauthorized();
 
         }
         private string GenerateJWT(Account user)
