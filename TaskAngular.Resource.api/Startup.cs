@@ -1,12 +1,17 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using TaskAngular.Auth.Common;
+using TaskAngular.Resource.api.Models;
 
-namespace TaskAngular.Auth.api
+namespace TaskAngular.Resource.api
 {
     public class Startup
     {
@@ -21,10 +26,7 @@ namespace TaskAngular.Auth.api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            var authOptionsConfiguration = Configuration.GetSection("Auth");
-            services.Configure<AuthOptions>(authOptionsConfiguration);
-          
-            services.AddControllers();
+            var authOptions = Configuration.GetSection("Auth").Get<AuthOptions>();
 
             services.AddCors(options =>
             {
@@ -35,6 +37,29 @@ namespace TaskAngular.Auth.api
                         .AllowAnyMethod()
                         .AllowAnyHeader();
                     });
+            });
+
+            services.AddSingleton(new BookStore());
+            services.AddControllers();
+
+
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = authOptions.Issuer,
+
+                    ValidateAudience = true,
+                    ValidAudience = authOptions.Audience,
+
+                    ValidateLifetime = true,
+
+                    IssuerSigningKey = authOptions.GetSymmetricSecurityKey(),
+                    ValidateIssuerSigningKey = true,
+                };
             });
         }
 
@@ -48,20 +73,20 @@ namespace TaskAngular.Auth.api
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseCors();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseCors();
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
         }
     }
