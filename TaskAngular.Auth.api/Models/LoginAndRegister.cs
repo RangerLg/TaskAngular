@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace TaskAngular.Auth.api.Models
 {
-    public class Login
+    public class LoginAndRegister
     {
         [Required]
         [EmailAddress]
         public string Email { get; set; }
 
         [Required]
-        public string Passeord { get; set; }
+        public string Password { get; set; }
     }
 }
