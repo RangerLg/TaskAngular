@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskAngular.Auth.api.Models
 {
-    public class Login
+    public class LoginAndRegister
     {
         [Required]
         [EmailAddress]
