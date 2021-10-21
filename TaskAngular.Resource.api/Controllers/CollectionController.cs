@@ -16,13 +16,13 @@ namespace TaskAngular.Resource.api.Controllers
     [ApiController]
     public class CollectionController : ControllerBase
     {
-        private readonly BookStore store;
+        private readonly BookStore _store;
         private readonly ApplicationDbContext _applicationDbContext;
         private Guid UserId => Guid.Parse(User.Claims.Single(c => c.Type == ClaimTypes.NameIdentifier).Value);
         public CollectionController(BookStore store, ApplicationDbContext applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;
-            this.store = store;
+            this._store = store;
         }
         [HttpGet]
         [Route("")]

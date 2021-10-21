@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskAngular.Auth.Common", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskAngular.Resource.api", "TaskAngular.Resource.api\TaskAngular.Resource.api.csproj", "{1B2FAAAB-326E-41FB-8789-72384A3DE36D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskAngular.Tests", "TaskAngular.Tests\TaskAngular.Tests.csproj", "{FA7D5B3A-0A92-430D-8862-F24BE5606BE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1B2FAAAB-326E-41FB-8789-72384A3DE36D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B2FAAAB-326E-41FB-8789-72384A3DE36D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B2FAAAB-326E-41FB-8789-72384A3DE36D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA7D5B3A-0A92-430D-8862-F24BE5606BE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA7D5B3A-0A92-430D-8862-F24BE5606BE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA7D5B3A-0A92-430D-8862-F24BE5606BE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA7D5B3A-0A92-430D-8862-F24BE5606BE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
